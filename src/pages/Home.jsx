@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { getPersonajes } from "../services/api_services.js";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
 	const { store, dispatch } = useGlobalReducer();
@@ -21,7 +22,7 @@ export const Home = () => {
 				{store.personajes.map((personaje) => (
 					<div
 						key={personaje.id}
-						style={{ minWidth: "250px"}}
+						style={{ minWidth: "250px" }}
 					>
 						<div className="card h-100 d-flex flex-column">
 							<img
@@ -32,6 +33,14 @@ export const Home = () => {
 							<div className="card-body d-flex flex-column ">
 								<h5>{personaje.name}</h5>
 								<p className="flex-grow-1">{personaje.occupation}</p>
+							</div>
+							<div className="card-footer">
+								<Link to={`/details/${personaje.id}`}>
+									<button>
+										DETAILS
+									</button>
+								</Link>
+
 							</div>
 						</div>
 					</div>
