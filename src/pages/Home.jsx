@@ -10,6 +10,16 @@ export const Home = () => {
 		getPersonajes(dispatch);
 	}, [dispatch])
 
+	const toggleFavorito = (personaje) => {
+		const existe = store.favoritos.find(fav => fav.id === personaje.id);
+		
+		if (existe) {
+			dispatch({ type: 'remove_favorito', payload: personaje.id });
+		} else {
+			dispatch({ type: 'add_favorito', payload: personaje });
+		}
+	}
+
 	return (
 		<div className="container mt-5">
 			<h2>Personajes</h2>
@@ -35,12 +45,12 @@ export const Home = () => {
 								<p className="flex-grow-1">{personaje.occupation}</p>
 							</div>
 							<div className="card-footer">
+								<button onClick={() => toggleFavorito(personaje)}>
+									FAVORITO
+								</button>
 								<Link to={`/details/${personaje.id}`}>
-									<button>
-										DETAILS
-									</button>
+									<button>DETAILS</button>
 								</Link>
-
 							</div>
 						</div>
 					</div>
