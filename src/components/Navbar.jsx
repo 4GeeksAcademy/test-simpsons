@@ -45,10 +45,6 @@ export const Navbar = () => {
 							</div>
 						)}
 					</div>
-
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
 				</div>
 			</div>
 		</nav>

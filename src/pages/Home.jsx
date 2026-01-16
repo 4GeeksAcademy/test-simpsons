@@ -12,7 +12,7 @@ export const Home = () => {
 
 	const toggleFavorito = (personaje) => {
 		const existe = store.favoritos.find(fav => fav.id === personaje.id);
-		
+
 		if (existe) {
 			dispatch({ type: 'remove_favorito', payload: personaje.id });
 		} else {
@@ -45,11 +45,11 @@ export const Home = () => {
 								<p className="flex-grow-1">{personaje.occupation}</p>
 							</div>
 							<div className="card-footer">
-								<button onClick={() => toggleFavorito(personaje)}>
-									FAVORITO
+								<button className="btn btn-danger" onClick={() => toggleFavorito(personaje)}>
+									{store.favoritos.find(fav => fav.id === personaje.id) ? 'favorite -' : 'favorite +'}
 								</button>
 								<Link to={`/details/${personaje.id}`}>
-									<button>DETAILS</button>
+									<button className="btn btn-warning ms-4">DETAILS</button>
 								</Link>
 							</div>
 						</div>
