@@ -1,7 +1,9 @@
-export const initialStore=()=>{
+export const initialStore = () => {
+  const favoritosGuardados = localStorage.getItem('favoritos');
+  
   return {
-   personajes: [],
-   favoritos: []
+    personajes: [],
+    favoritos: favoritosGuardados ? JSON.parse(favoritosGuardados) : []
   }
 }
 
@@ -14,15 +16,23 @@ export default function storeReducer(store, action = {}) {
       };
     
     case 'add_favorito':
+      const nuevosFavoritos = [...store.favoritos, action.payload];
+
+      localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
+
       return {
         ...store,
-        favoritos: [...store.favoritos, action.payload]
+        favoritos: nuevosFavoritos
       };
     
     case 'remove_favorito':
+      const favoritosFiltrados = store.favoritos.filter(fav => fav.id !== action.payload);
+
+      localStorage.setItem('favoritos', JSON.stringify(favoritosFiltrados));
+      
       return {
         ...store,
-        favoritos: store.favoritos.filter(fav => fav.id !== action.payload)
+        favoritos: favoritosFiltrados
       };
     
     default:
